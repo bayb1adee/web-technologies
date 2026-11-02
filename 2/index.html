@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project 2 — forEach()</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <a class="back" href="../index.html">← Back to projects</a>
+      <span class="badge">Project 2</span>
+    </header>
+
+    <div class="proj-head">
+      <span class="big-num">2</span>
+      <div>
+        <h1>Iterating an array with forEach()</h1>
+        <p class="lead">The <code class="inline-code">forEach</code> operator walks through every element of an array.</p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>Demo</h2>
+      <p class="muted">We have an array of words. <strong>Direct</strong> shows them in order; <strong>Shifted</strong> shows each word moved one position forward (a rotation).</p>
+      <div class="btn-row">
+        <button class="btn" onclick="First()">Direct</button>
+        <button class="btn ghost" onclick="Second()">Shifted</button>
+      </div>
+      <div id="out" class="demo">
+        <p class="muted" id="hint">Press a button to render the array.</p>
+        <div class="flex-demo" id="cards"></div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>Code</h2>
+      <pre>var a = ["Alpha", "Beta", "Gamma", "Delta"];
+
+// Regular (non-arrow) functions — refactored to arrows in Project 3.
+function First() {
+  var box = document.querySelector("#cards");
+  box.innerHTML = "";
+  a.forEach(function (item) {
+    box.innerHTML += "&lt;div&gt;" + item + "&lt;/div&gt;";
+  });
+}
+
+function Second() {
+  var box = document.querySelector("#cards");
+  box.innerHTML = "";
+  a.forEach(function (item, index) {
+    var shifted = a[(index + 1) % a.length];
+    box.innerHTML += "&lt;div&gt;" + shifted + "&lt;/div&gt;";
+  });
+}</pre>
+    </div>
+
+    <footer>Project 2 · Matvey Kovalchuk · group 353</footer>
+  </div>
+
+  <script>
+    var a = ["Alpha", "Beta", "Gamma", "Delta"];
+
+    function render(items) {
+      var cards = document.querySelector("#cards");
+      var hint = document.querySelector("#hint");
+      cards.innerHTML = "";
+      hint.textContent = items.join("  ·  ");
+      items.forEach(function (item) {
+        var d = document.createElement("div");
+        d.textContent = item;
+        cards.appendChild(d);
+      });
+    }
+
+    function First() {
+      render(a);
+    }
+
+    function Second() {
+      var shifted = [];
+      a.forEach(function (item, index) {
+        shifted.push(a[(index + 1) % a.length]);
+      });
+      render(shifted);
+    }
+  </script>
+</body>
+</html>

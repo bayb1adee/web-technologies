@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project 7 — Event-Driven Programming</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <a class="back" href="../index.html">← Back to projects</a>
+      <span class="badge">Project 7</span>
+    </header>
+
+    <div class="proj-head">
+      <span class="big-num">7</span>
+      <div>
+        <h1>JS Event-Driven Programming</h1>
+        <p class="lead">An app that determines the current date and time using event handlers.</p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>Demo</h2>
+      <p class="muted">The handler is attached only after the DOM is fully loaded (<code class="inline-code">DOMContentLoaded</code>).</p>
+      <div class="demo">
+        <div class="hello" id="date">—</div>
+        <div class="btn-row">
+          <button class="btn" id="show">Show current date &amp; time</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>Code</h2>
+      <pre>document.addEventListener("DOMContentLoaded", () => {
+  document.querySelector("#show").onclick = () => {
+    document.querySelector("#date").textContent = new Date().toLocaleString();
+  };
+});</pre>
+      <p class="muted">A few useful <code class="inline-code">Date</code> methods:</p>
+      <pre>const now = new Date();
+now.toLocaleDateString();   // "11/2/2026"
+now.toLocaleTimeString();   // "16:25:03"
+now.getFullYear();          // 2026
+now.getDay();               // day of the week (0 = Sunday)</pre>
+    </div>
+
+    <footer>Project 7 · Matvey Kovalchuk · group 353</footer>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      document.querySelector("#show").onclick = () => {
+        const now = new Date();
+        document.querySelector("#date").textContent =
+          now.toLocaleString("en-GB", { dateStyle: "full", timeStyle: "medium" });
+      };
+    });
+  </script>
+</body>
+</html>

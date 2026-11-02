@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project 9 — document.querySelectorAll()</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <a class="back" href="../index.html">← Back to projects</a>
+      <span class="badge">Project 9</span>
+    </header>
+
+    <div class="proj-head">
+      <span class="big-num">9</span>
+      <div>
+        <h1>document.querySelectorAll() &amp; data-attributes</h1>
+        <p class="lead">Attaching one handler to many buttons using <code class="inline-code">querySelectorAll()</code> and <code class="inline-code">data-color</code>.</p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>Demo</h2>
+      <p class="muted">The buttons below share a class and carry a <code class="inline-code">data-color</code> attribute. One loop wires them all up.</p>
+      <div class="demo">
+        <div class="hello" id="hello">Hello!</div>
+        <div class="btn-row">
+          <button class="btn color-change" data-color="red" style="background:#ff3b30;">Red</button>
+          <button class="btn color-change" data-color="blue" style="background:#0071e3;">Blue</button>
+          <button class="btn color-change" data-color="green" style="background:#34c759;">Green</button>
+          <button class="btn color-change" data-color="gold" style="background:#ff9f0a;">Gold</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>Markup</h2>
+      <pre>&lt;button class="color-change" data-color="red"&gt;Red&lt;/button&gt;
+&lt;button class="color-change" data-color="blue"&gt;Blue&lt;/button&gt;
+&lt;button class="color-change" data-color="green"&gt;Green&lt;/button&gt;</pre>
+    </div>
+
+    <div class="panel">
+      <h2>Code</h2>
+      <pre>document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".color-change").forEach(button => {
+    button.onclick = () => {
+      document.querySelector("#hello").style.color = button.dataset.color;
+    };
+  });
+});</pre>
+    </div>
+
+    <footer>Project 9 · Matvey Kovalchuk · group 353</footer>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      document.querySelectorAll(".color-change").forEach(button => {
+        button.onclick = () => {
+          document.querySelector("#hello").style.color = button.dataset.color;
+        };
+      });
+    });
+  </script>
+</body>
+</html>

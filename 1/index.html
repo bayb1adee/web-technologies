@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project 1 — CSS Grid &amp; Bootstrap</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    /* CSS Grid menu */
+    .grid-menu {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+      margin: 12px 0;
+    }
+    .grid-menu a {
+      display: block;
+      padding: 30px 20px;
+      text-align: center;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--card);
+      color: var(--text);
+      font-size: 1.25rem;
+      font-weight: 700;
+      transition: transform .18s ease, background .18s ease, border-color .18s ease;
+    }
+    .grid-menu a:hover { text-decoration: none; transform: translateY(-4px); background: var(--card-hover); border-color: var(--accent); }
+    .grid-menu small { display: block; color: var(--muted); font-weight: 500; margin-top: 6px; }
+
+    /* Bootstrap-style 12-column demo */
+    .bs-row { display: flex; flex-wrap: wrap; gap: 0; margin: 10px 0; }
+    .bs-row > div {
+      padding: 10px 6px;
+      text-align: center;
+      border: 1px solid #cfe4fb;
+      background: #e6f2ff;
+      color: #0b3a66;
+      font-size: .85rem;
+      font-weight: 600;
+      box-sizing: border-box;
+    }
+    .col-4 { width: 33.333%; }
+    .col-6 { width: 50%; }
+    .col-12 { width: 100%; }
+    .col-2 { width: 16.666%; }
+    .col-10 { width: 83.333%; }
+    .alt { background: #eef2ff; }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <a class="back" href="../index.html">← Back to projects</a>
+      <span class="badge">Project 1</span>
+    </header>
+
+    <div class="proj-head">
+      <span class="big-num">1</span>
+      <div>
+        <h1>CSS Grid Layout Module</h1>
+        <p class="lead">A menu built with CSS Grid, pointing to the Front&nbsp;End and Back&nbsp;End pages.</p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>Grid menu</h2>
+      <p class="muted">The container uses <code class="inline-code">display: grid</code> with automatic columns and a gap between them.</p>
+      <div class="grid-menu">
+        <a href="front.html">Front&nbsp;End<small>HTML · CSS · JavaScript</small></a>
+        <a href="back.html">Back&nbsp;End<small>ASP.NET · C# · databases</small></a>
+      </div>
+      <pre>.grid-menu {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+}</pre>
+    </div>
+
+    <div class="panel">
+      <h2>Bootstrap Grid System</h2>
+      <p class="muted">Bootstrap splits a page into 12 columns. An element takes <code class="inline-code">col-x</code> of those columns. Below is the same idea rendered with plain CSS.</p>
+      <div class="bs-row">
+        <div class="col-4">.col-4</div>
+        <div class="col-4 alt">.col-4</div>
+        <div class="col-4">.col-4</div>
+      </div>
+      <div class="bs-row">
+        <div class="col-2">.col-2</div>
+        <div class="col-10 alt">.col-10</div>
+      </div>
+      <div class="bs-row">
+        <div class="col-6">.col-6</div>
+        <div class="col-6 alt">.col-6</div>
+      </div>
+      <div class="bs-row">
+        <div class="col-12 alt">.col-12</div>
+      </div>
+      <pre>&lt;div class="row"&gt;
+  &lt;div class="col-sm-4"&gt;.col-sm-4&lt;/div&gt;
+  &lt;div class="col-sm-8"&gt;.col-sm-8&lt;/div&gt;
+&lt;/div&gt;</pre>
+    </div>
+
+    <footer>Project 1 · Matvey Kovalchuk · group 353</footer>
+  </div>
+</body>
+</html>

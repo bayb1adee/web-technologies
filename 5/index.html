@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project 5 — OOP in C# (Bremen Musicians)</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <a class="back" href="../index.html">← Back to projects</a>
+      <span class="badge">Project 5</span>
+    </header>
+
+    <div class="proj-head">
+      <span class="big-num">5</span>
+      <div>
+        <h1>OOP in C# — “Bremen Town Musicians”</h1>
+        <p class="lead">Inheritance and polymorphism, modelled with the heroes of the Brothers Grimm fairy tale.</p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>Live simulation</h2>
+      <p class="muted"><strong>Normal</strong> — each hero says his own phrase (polymorphism). <strong>Strange voice</strong> — each hero is shown but the sound is produced by the next hero (the fairy-tale trick).</p>
+      <div class="btn-row">
+        <button class="btn" id="normal">Normal</button>
+        <button class="btn ghost" id="strange">Strange voice</button>
+      </div>
+      <div class="demo" id="stage" style="text-align:left;">
+        <p class="muted">Press a button to let the heroes speak.</p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>The class hierarchy</h2>
+      <pre>class AHero {                                   // base hero
+    internal virtual string Say() { return "Hi"; }
+}
+
+class APet : AHero { }                          // group of animals
+
+class ADog   : APet { internal override string Say() { return "Gav"; } }
+class ACat   : APet { internal override string Say() { return "Miau"; } }
+class AGallus: APet { internal override string Say() { return "ku-ka-re-ku"; } }
+class ASinus : APet { internal override string Say() { return "i-a"; } }
+
+class AHomo  : AHero {                          // the Troubadour
+    internal override string Say() { return "I love the princess!"; }
+}</pre>
+    </div>
+
+    <div class="panel">
+      <h2>Polymorphism</h2>
+      <p class="muted">All heroes are stored in one array of the base type. Calling <code class="inline-code">Say()</code> invokes the correct overridden method.</p>
+      <pre>AHero[] ah = { new ADog(), new ACat(), new AGallus(),
+               new ASinus(), new AHomo() };
+
+Label1.Text = "";
+foreach (AHero AH in ah) {
+    Label1.Text += AH.Say() + "&lt;br&gt;";
+}</pre>
+    </div>
+
+    <div class="panel">
+      <h2>Strange voice (the fairy-tale logic)</h2>
+      <pre>int j = 0;
+for (int i = 0; i &lt; ah.Length; i++)
+{
+    j = (i &lt; ah.Length - 1) ? i + 1 : 0;   // next hero, wraps around
+    Label1.Text += "A " + ah[i].GetType().Name +
+                   " says " + ah[j].Say() + "&lt;br&gt;";
+}</pre>
+    </div>
+
+    <footer>Project 5 · Matvey Kovalchuk · group 353</footer>
+  </div>
+
+  <script>
+    class Hero {
+      constructor(name, sound) { this.name = name; this.sound = sound; }
+      say() { return this.sound; }
+    }
+
+    const heroes = [
+      new Hero("Dog", "Gav"),
+      new Hero("Cat", "Miau"),
+      new Hero("Gallus", "ku-ka-re-ku"),
+      new Hero("Sinus", "i-a"),
+      new Hero("Homo", "I love the princess!"),
+    ];
+
+    const show = (items) => {
+      const stage = document.querySelector("#stage");
+      stage.innerHTML = "";
+      items.forEach(line => {
+        const p = document.createElement("p");
+        p.innerHTML = line;
+        p.style.margin = "6px 0";
+        stage.appendChild(p);
+      });
+    };
+
+    document.querySelector("#normal").onclick = () => {
+      show(heroes.map(h => `A <strong>${h.name}</strong> says ${h.say()}`));
+    };
+
+    document.querySelector("#strange").onclick = () => {
+      const lines = heroes.map((h, i) => {
+        const j = (i < heroes.length - 1) ? i + 1 : 0;
+        return `A <strong>${h.name}</strong> says ${heroes[j].say()}`;
+      });
+      show(lines);
+    };
+  </script>
+</body>
+</html>

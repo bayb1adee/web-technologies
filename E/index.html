@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project E — Protected Folders</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <a class="back" href="../index.html">← Back to projects</a>
+      <span class="badge">Project E</span>
+    </header>
+
+    <div class="proj-head">
+      <span class="big-num">E</span>
+      <div>
+        <h1>Protected Folders</h1>
+        <p class="lead">Restricting access to a directory with HTTP authentication.</p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>What it is</h2>
+      <p>A <strong>protected folder</strong> is a directory that asks the visitor for a username and password before serving its files. The browser shows a login dialog and sends the credentials with every request. This is how the “Confucius” sample protects its <code class="inline-code">/A/</code> folder.</p>
+      <p class="muted">It is not the strongest defence on its own, but it is a standard first barrier — especially when combined with HTTPS.</p>
+    </div>
+
+    <div class="panel">
+      <h2>Apache: .htaccess + .htpasswd</h2>
+      <pre># .htaccess  (place inside the folder to protect)
+AuthType Basic
+AuthName "Restricted Area"
+AuthUserFile /home/user/.htpasswd
+Require valid-user</pre>
+      <pre># create a password file (one user)
+htpasswd -c .htpasswd matvey</pre>
+    </div>
+
+    <div class="panel">
+      <h2>ASP.NET / IIS: web.config</h2>
+      <pre>&lt;configuration&gt;
+  &lt;system.web&gt;
+    &lt;authentication mode="Windows" /&gt;
+    &lt;authorization&gt;
+      &lt;deny users="?" /&gt;   &lt;!-- deny anonymous visitors --&gt;
+    &lt;/authorization&gt;
+  &lt;/system.web&gt;
+&lt;/configuration&gt;</pre>
+    </div>
+
+    <div class="panel">
+      <h2>Demo (client-side simulation)</h2>
+      <p class="muted">The real check happens on the server. This demo only mimics the dialog — the correct “password” is <code class="inline-code">353</code>.</p>
+      <div class="demo" id="gate">
+        <p id="gate-msg">This folder is protected.</p>
+        <input type="password" id="pass" placeholder="Password" autocomplete="off">
+        <div class="btn-row">
+          <button class="btn" id="unlock">Unlock</button>
+        </div>
+        <div class="note" id="secret" style="display:none;">
+          🎉 Access granted — welcome to the protected area.
+        </div>
+      </div>
+    </div>
+
+    <footer>Project E · Matvey Kovalchuk · group 353</footer>
+  </div>
+
+  <script>
+    document.querySelector("#unlock").onclick = () => {
+      const secret = document.querySelector("#secret");
+      const msg = document.querySelector("#gate-msg");
+      if (document.querySelector("#pass").value === "353") {
+        secret.style.display = "block";
+        msg.textContent = "Authenticated successfully.";
+      } else {
+        secret.style.display = "none";
+        msg.textContent = "Access denied — wrong password.";
+      }
+    };
+  </script>
+</body>
+</html>

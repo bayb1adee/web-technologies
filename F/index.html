@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project F — JSON &amp; jQuery</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <a class="back" href="../index.html">← Back to projects</a>
+      <span class="badge">Project F</span>
+    </header>
+
+    <div class="proj-head">
+      <span class="big-num">F</span>
+      <div>
+        <h1>JSON &amp; jQuery</h1>
+        <p class="lead">Reading the official exchange rate from the National Bank of the Republic of Belarus API.</p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>Demo</h2>
+      <p class="muted">Press a button to fetch the current official rate and display it on the page.</p>
+      <div class="demo">
+        <p style="font-size:1.1rem;">
+          1 USD = <span id="price" style="font-weight:800;color:var(--accent);">—</span> BYN
+        </p>
+        <div class="btn-row">
+          <button class="btn" onclick="quote(431, 'USD')">GO · USD</button>
+          <button class="btn ghost" onclick="quote(451, 'EUR')">GO · EUR</button>
+        </div>
+        <p class="muted" id="status"></p>
+        <p class="muted" style="font-size:.8rem;">Note: the teacher's 2019 PDF used currency IDs 145 (USD) and 292 (EUR); the National Bank has since renumbered them to 431 and 451.</p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>The API returns JSON</h2>
+      <pre>{
+  "Cur_ID": 431,
+  "Date": "2026-11-02T00:00:00",
+  "Cur_Abbreviation": "USD",
+  "Cur_Scale": 1,
+  "Cur_Name": "Доллар США",
+  "Cur_OfficialRate": 2.9460
+}</pre>
+    </div>
+
+    <div class="panel">
+      <h2>Code</h2>
+      <pre>function quote(id, abbr) {
+  var u = "https://api.nbrb.by/exrates/rates/" + id;
+  $.getJSON(u)
+    .done(function (data) {
+      $("#price").text(data.Cur_OfficialRate + " (" + data.Cur_Abbreviation + ")");
+      $("#status").text("Updated: " + data.Date);
+    })
+    .fail(function () {
+      $("#status").text("Could not load the rate (check the connection).");
+    });
+}</pre>
+    </div>
+
+    <footer>Project F · Matvey Kovalchuk · group 353</footer>
+  </div>
+
+  <script>
+    function quote(id, abbr) {
+      var u = "https://api.nbrb.by/exrates/rates/" + id;
+      $("#status").text("Loading…");
+      $.getJSON(u)
+        .done(function (data) {
+          $("#price").text(data.Cur_OfficialRate + " (" + data.Cur_Abbreviation + ")");
+          $("#status").text("Updated: " + data.Date);
+        })
+        .fail(function () {
+          $("#status").text("Could not load the rate (check the connection or CORS).");
+        });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project A — DropDown</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <a class="back" href="../index.html">← Back to projects</a>
+      <span class="badge">Project A</span>
+    </header>
+
+    <div class="proj-head">
+      <span class="big-num">A</span>
+      <div>
+        <h1>DropDown</h1>
+        <p class="lead">Replacing a bunch of colour buttons with a single <code class="inline-code">&lt;select&gt;</code> dropdown.</p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>Demo</h2>
+      <p class="muted">Pick a colour from the dropdown — the <code class="inline-code">#hello</code> element changes to the selected value.</p>
+      <div class="demo">
+        <div class="hello" id="hello">Hello!</div>
+        <select id="color-change">
+          <option value="red">Red</option>
+          <option value="blue">Blue</option>
+          <option value="green">Green</option>
+          <option value="gold">Gold</option>
+          <option value="violet">Violet</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>Markup</h2>
+      <pre>&lt;h1 id="hello"&gt;Hello!&lt;/h1&gt;
+&lt;select id="color-change"&gt;
+  &lt;option value="red"&gt;Red&lt;/option&gt;
+  &lt;option value="blue"&gt;Blue&lt;/option&gt;
+  &lt;option value="green"&gt;Green&lt;/option&gt;
+&lt;/select&gt;</pre>
+    </div>
+
+    <div class="panel">
+      <h2>Code</h2>
+      <pre>document.addEventListener("DOMContentLoaded", () => {
+  document.querySelector("#color-change").onchange = () => {
+    document.querySelector("#hello").style.color = this.value;
+  };
+});</pre>
+      <p class="muted">Because an arrow function has its own <code class="inline-code">this</code> binding, the cleanest ES6 version reads the value from the element directly:</p>
+      <pre>document.addEventListener("DOMContentLoaded", () => {
+  const select = document.querySelector("#color-change");
+  select.onchange = () => {
+    document.querySelector("#hello").style.color = select.value;
+  };
+});</pre>
+    </div>
+
+    <footer>Project A · Matvey Kovalchuk · group 353</footer>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const select = document.querySelector("#color-change");
+      select.onchange = () => {
+        document.querySelector("#hello").style.color = select.value;
+      };
+    });
+  </script>
+</body>
+</html>

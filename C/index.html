@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project C — Hegelian Dialectics: Balmer Peak</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .dialectic {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1fr;
+      gap: 10px;
+      align-items: center;
+      text-align: center;
+      margin: 14px 0;
+    }
+    .dialectic .term {
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--card);
+      font-weight: 700;
+    }
+    .dialectic .arrow { font-size: 1.6rem; color: var(--accent); }
+    .rules { counter-reset: rule; list-style: none; padding: 0; }
+    .rules li {
+      counter-increment: rule;
+      margin: 12px 0;
+      padding: 12px 14px 12px 48px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--card);
+      position: relative;
+    }
+    .rules li::before {
+      content: counter(rule);
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #fff;
+      font-weight: 800;
+      display: grid;
+      place-items: center;
+    }
+    .peak-chart { max-width: 520px; margin: 0 auto; }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <a class="back" href="../index.html">← Back to projects</a>
+      <span class="badge">Project C</span>
+    </header>
+
+    <div class="proj-head">
+      <span class="big-num">C</span>
+      <div>
+        <h1>Hegelian Dialectics: the Balmer peak as synthesis</h1>
+        <p class="lead">A satirical page in the finest tradition of engineering humour.</p>
+      </div>
+    </div>
+
+    <div class="note">This page is satire — the “Balmer peak” is a running joke among developers, not a productivity recommendation. The only serious part is the advice to know your limits.</div>
+
+    <div class="panel">
+      <h2>The Balmer peak</h2>
+      <p>Lore has it that a programmer's productivity is a function of blood alcohol. Named after the <em>Balmer series</em> of hydrogen spectral lines, the curve peaks around <strong>0.129&nbsp;%</strong> — the “Ballmer peak” — after which the code, like the atom's electrons, collapses to a lower energy state.</p>
+      <div class="peak-chart">
+        <svg viewBox="0 0 520 220" role="img" aria-label="Balmer peak curve">
+          <defs>
+            <linearGradient id="g" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stop-color="#0071e3"/>
+              <stop offset="0.5" stop-color="#5856d6"/>
+              <stop offset="1" stop-color="#ff9f0a"/>
+            </linearGradient>
+          </defs>
+          <line x1="40" y1="180" x2="490" y2="180" stroke="#c7c7cc" stroke-width="2"/>
+          <line x1="40" y1="180" x2="40" y2="20" stroke="#c7c7cc" stroke-width="2"/>
+          <text x="20" y="30" fill="#6e6e73" font-size="11" text-anchor="end">productivity</text>
+          <text x="250" y="210" fill="#6e6e73" font-size="11" text-anchor="middle">drinks →</text>
+          <path d="M40 180 C 150 180, 200 30, 270 30 C 340 30, 380 180, 490 180" fill="none" stroke="url(#g)" stroke-width="4"/>
+          <circle cx="270" cy="30" r="6" fill="#5856d6"/>
+          <line x1="270" y1="30" x2="270" y2="180" stroke="#5856d6" stroke-dasharray="4 5" stroke-width="1.5"/>
+          <text x="270" y="196" fill="#5856d6" font-size="12" text-anchor="middle" font-weight="700">Balmer peak · 0.129 %</text>
+        </svg>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>The dialectic</h2>
+      <p>Hegel taught that every idea (thesis) meets its opposite (antithesis), and from their clash a higher truth (synthesis) emerges. Applied to the craft of programming:</p>
+      <div class="dialectic">
+        <div class="term">Thesis<br><span class="muted">sober → nothing compiles</span></div>
+        <div class="arrow">→</div>
+        <div class="term">Antithesis<br><span class="muted">drunk → nothing compiles</span></div>
+        <div class="arrow">→</div>
+        <div class="term">Synthesis<br><span class="muted">the peak → ships on Friday</span></div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>Three rules of culture</h2>
+      <p class="muted">A. S. Makarenko, the Soviet pedagogue, argued that even here one needs culture, and offered his pupils three rules.</p>
+      <ol class="rules">
+        <li><strong>Never drink on an empty stomach.</strong></li>
+        <li><strong>Always eat a snack.</strong> (“Zakusyvaj!”)</li>
+        <li><strong>Know when to stop</strong> — the exact glass where you still keep a human face.</li>
+      </ol>
+    </div>
+
+    <div class="panel">
+      <h2>Weights (for scientific purposes)</h2>
+      <ul class="plain">
+        <li>Cognac — <span class="muted">results inconclusive</span></li>
+        <li>Port wine — <span class="muted">not exactly port wine, but close</span></li>
+        <li>Dry wine — <span class="muted">under review</span></li>
+        <li>Beer — <span class="muted">the classical reference curve</span></li>
+      </ul>
+    </div>
+
+    <footer>Project C · Matvey Kovalchuk · group 353</footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project B — ToDo List</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <a class="back" href="../index.html">← Back to projects</a>
+      <span class="badge">Project B</span>
+    </header>
+
+    <div class="proj-head">
+      <span class="big-num">B</span>
+      <div>
+        <h1>ToDo List</h1>
+        <p class="lead">An object-oriented, event-driven ToDo list.</p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>Demo</h2>
+      <p class="muted">The <strong>Add</strong> button is disabled until you type something. Click a task's <strong>×</strong> to remove it.</p>
+      <div class="demo">
+        <h1 style="margin:0 0 6px;">To Do</h1>
+        <ul class="todo-list" id="tasks"></ul>
+        <form id="form" autocomplete="off">
+          <input type="text" id="task" placeholder="New Task" size="33" autofocus>
+          <div class="btn-row">
+            <input type="submit" class="btn" id="submit" value="Add">
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>Code (object-oriented, ES6)</h2>
+      <pre>class ToDo {
+  constructor(list, input, submit) {
+    this.list = list;
+    this.input = input;
+    this.submit = submit;
+
+    // By default, the submit button is disabled.
+    this.submit.disabled = true;
+
+    // Enable the button only if there is text in the input field.
+    this.input.onkeyup = () => {
+      this.submit.disabled = this.input.value.length === 0;
+    };
+
+    this.form = this.input.closest("form");
+    this.form.onsubmit = () => this.add();
+  }
+
+  add() {
+    const li = document.createElement("li");
+    li.innerHTML = this.input.value;
+    const x = document.createElement("span");
+    x.className = "x";
+    x.textContent = "×";
+    x.onclick = () => li.remove();
+    li.appendChild(x);
+    this.list.append(li);
+
+    this.input.value = "";          // clear the input field
+    this.submit.disabled = true;    // disable again
+    return false;                   // stop the form from submitting
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  new ToDo(
+    document.querySelector("#tasks"),
+    document.querySelector("#task"),
+    document.querySelector("#submit")
+  );
+});</pre>
+    </div>
+
+    <footer>Project B · Matvey Kovalchuk · group 353</footer>
+  </div>
+
+  <script>
+    class ToDo {
+      constructor(list, input, submit) {
+        this.list = list;
+        this.input = input;
+        this.submit = submit;
+        this.submit.disabled = true;
+        this.input.onkeyup = () => {
+          this.submit.disabled = this.input.value.length === 0;
+        };
+        const form = this.input.closest("form");
+        form.onsubmit = () => this.add();
+      }
+
+      add() {
+        const li = document.createElement("li");
+        li.innerHTML = this.input.value;
+        const x = document.createElement("span");
+        x.className = "x";
+        x.textContent = "×";
+        x.onclick = () => li.remove();
+        li.appendChild(x);
+        this.list.append(li);
+        this.input.value = "";
+        this.submit.disabled = true;
+        return false;
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      new ToDo(
+        document.querySelector("#tasks"),
+        document.querySelector("#task"),
+        document.querySelector("#submit")
+      );
+    });
+  </script>
+</body>
+</html>

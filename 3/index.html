@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project 3 — Arrow Functions</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <a class="back" href="../index.html">← Back to projects</a>
+      <span class="badge">Project 3</span>
+    </header>
+
+    <div class="proj-head">
+      <span class="big-num">3</span>
+      <div>
+        <h1>Arrow Functions (ES6)</h1>
+        <p class="lead">Project 2 refactored so that every function is declared with the arrow syntax <code class="inline-code">() =&gt;</code>.</p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>Demo</h2>
+      <p class="muted">Identical behaviour to Project 2, but all callbacks are now arrow functions.</p>
+      <div class="btn-row">
+        <button class="btn" id="direct">Direct</button>
+        <button class="btn ghost" id="shifted">Shifted</button>
+      </div>
+      <div class="demo">
+        <p class="muted" id="hint">Press a button to render the array.</p>
+        <div class="flex-demo" id="cards"></div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>Regular function → arrow function</h2>
+      <pre>// Before (Project 2)
+a.forEach(function (item) {
+  console.log(item);
+});
+
+// After (Project 3) — arrow function
+a.forEach((item) => {
+  console.log(item);
+});
+
+// Even shorter for a single expression
+a.forEach(item => console.log(item));</pre>
+      <pre>const First = () => {
+  const cards = document.querySelector("#cards");
+  cards.innerHTML = "";
+  a.forEach(item => cards.innerHTML += `&lt;div&gt;${item}&lt;/div&gt;`);
+};
+
+const Second = () => {
+  const cards = document.querySelector("#cards");
+  cards.innerHTML = "";
+  a.forEach((item, index) => {
+    const shifted = a[(index + 1) % a.length];
+    cards.innerHTML += `&lt;div&gt;${shifted}&lt;/div&gt;`;
+  });
+};</pre>
+    </div>
+
+    <footer>Project 3 · Matvey Kovalchuk · group 353</footer>
+  </div>
+
+  <script>
+    const a = ["Alpha", "Beta", "Gamma", "Delta"];
+
+    const render = (items) => {
+      const cards = document.querySelector("#cards");
+      const hint = document.querySelector("#hint");
+      cards.innerHTML = "";
+      hint.textContent = items.join("  ·  ");
+      items.forEach(item => {
+        const d = document.createElement("div");
+        d.textContent = item;
+        cards.appendChild(d);
+      });
+    };
+
+    const First = () => render(a);
+
+    const Second = () => {
+      const shifted = [];
+      a.forEach((item, index) => shifted.push(a[(index + 1) % a.length]));
+      render(shifted);
+    };
+
+    document.querySelector("#direct").onclick = () => First();
+    document.querySelector("#shifted").onclick = () => Second();
+  </script>
+</body>
+</html>

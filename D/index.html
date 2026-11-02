@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project D — SPA</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <a class="back" href="../index.html">← Back to projects</a>
+      <span class="badge">Project D</span>
+    </header>
+
+    <div class="proj-head">
+      <span class="big-num">D</span>
+      <div>
+        <h1>SPA — Single Page Application</h1>
+        <p class="lead">Only the part of the page that actually changes is modified; the rest stays put.</p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>Demo</h2>
+      <p class="muted">The three views live on one page. Clicking a button hides every <code class="inline-code">&lt;div&gt;</code> and shows the requested one.</p>
+      <div class="demo">
+        <div class="btn-row">
+          <button class="btn" data-page="page1">Page 1</button>
+          <button class="btn ghost" data-page="page2">Page 2</button>
+          <button class="btn ghost" data-page="page3">Page 3</button>
+        </div>
+
+        <div class="page active" id="page1">
+          <h2>This is page 1</h2>
+          <p class="muted">HTML — the skeleton of every page.</p>
+        </div>
+        <div class="page" id="page2">
+          <h2>This is page 2</h2>
+          <p class="muted">CSS — the skin and the layout.</p>
+        </div>
+        <div class="page" id="page3">
+          <h2>This is page 3</h2>
+          <p class="muted">JavaScript — the muscles and the brain.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>Code</h2>
+      <pre>const showPage = (page) => {
+  // Hide all other pages
+  document.querySelectorAll("div.page").forEach(div => {
+    div.classList.remove("active");
+  });
+  // Show the requested page
+  document.querySelector("#" + page).classList.add("active");
+};
+
+document.querySelectorAll("button[data-page]").forEach(button => {
+  button.onclick = () => showPage(button.dataset.page);
+});</pre>
+      <p class="muted">A tiny CSS rule drives the hiding:</p>
+      <pre>.page { display: none; }
+.page.active { display: block; }</pre>
+    </div>
+
+    <footer>Project D · Matvey Kovalchuk · group 353</footer>
+  </div>
+
+  <script>
+    const showPage = (page) => {
+      document.querySelectorAll("div.page").forEach(div => div.classList.remove("active"));
+      document.querySelector("#" + page).classList.add("active");
+      document.querySelectorAll("button[data-page]").forEach(button => {
+        button.classList.toggle("ghost", button.dataset.page !== page);
+      });
+    };
+
+    document.querySelectorAll("button[data-page]").forEach(button => {
+      button.onclick = () => showPage(button.dataset.page);
+    });
+  </script>
+</body>
+</html>

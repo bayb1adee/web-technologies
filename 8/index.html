@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project 8 — ES6 Events: CSS Changing</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <a class="back" href="../index.html">← Back to projects</a>
+      <span class="badge">Project 8</span>
+    </header>
+
+    <div class="proj-head">
+      <span class="big-num">8</span>
+      <div>
+        <h1>ES6 Events: CSS Changing</h1>
+        <p class="lead">Changing the style property of a particular element with event handlers.</p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>Demo</h2>
+      <p class="muted">Each button changes the font colour of the <code class="inline-code">#hello</code> element.</p>
+      <div class="demo">
+        <div class="hello" id="hello">Hello!</div>
+        <div class="btn-row">
+          <button class="btn" id="red" style="background:#ff3b30;">Red</button>
+          <button class="btn" id="blue" style="background:#0071e3;">Blue</button>
+          <button class="btn" id="green" style="background:#34c759;">Green</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>Code</h2>
+      <pre>document.addEventListener("DOMContentLoaded", () => {
+  // Change font color to red
+  document.querySelector("#red").onclick = () => {
+    document.querySelector("#hello").style.color = "red";
+  };
+  // Change font color to blue
+  document.querySelector("#blue").onclick = () => {
+    document.querySelector("#hello").style.color = "blue";
+  };
+  // Change font color to green
+  document.querySelector("#green").onclick = () => {
+    document.querySelector("#hello").style.color = "green";
+  };
+});</pre>
+    </div>
+
+    <footer>Project 8 · Matvey Kovalchuk · group 353</footer>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      document.querySelector("#red").onclick = () => {
+        document.querySelector("#hello").style.color = "red";
+      };
+      document.querySelector("#blue").onclick = () => {
+        document.querySelector("#hello").style.color = "blue";
+      };
+      document.querySelector("#green").onclick = () => {
+        document.querySelector("#hello").style.color = "green";
+      };
+    });
+  </script>
+</body>
+</html>
