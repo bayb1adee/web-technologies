@@ -40,5 +40,4 @@ Then visit <http://localhost:8080>.
 
 - Projects 4–6 are ASP.NET/C#: on a static host they are presented as code +
   a JavaScript simulation of the same behaviour.
-- Project F uses the NBRB API (`api.nbrb.by`); the currency IDs were updated
-  from the 2019 assignment (USD `431`, EUR `451`).
+- Project F uses the NBRB API (`api.nbrb.by`).
