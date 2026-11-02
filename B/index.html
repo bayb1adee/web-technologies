@@ -57,8 +57,11 @@
   }
 
   add() {
+    const text = this.input.value.trim();
+    if (!text) return false;        // ignore empty / whitespace-only tasks
+
     const li = document.createElement("li");
-    li.innerHTML = this.input.value;
+    li.textContent = text;          // text, not HTML — typed markup stays literal
     const x = document.createElement("span");
     x.className = "x";
     x.textContent = "×";
@@ -99,8 +102,10 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       add() {
+        const text = this.input.value.trim();
+        if (!text) return false;
         const li = document.createElement("li");
-        li.innerHTML = this.input.value;
+        li.textContent = text;
         const x = document.createElement("span");
         x.className = "x";
         x.textContent = "×";
